@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-fragment id="WebFragment_ID" version="3.1"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-fragment_3_1.xsd">
+    <display-name>OMock</display-name>
+    <name>OMock</name>
+
+    <context-param>
+        <param-name>contextInitializerClasses</param-name>
+        <param-value>com.github.xwine.util.spring.spi.BootstrapSpringListener</param-value>
+    </context-param>
+    <!-- 表示一个执行序列  -->
+    <ordering>
+        <!-- 表示在项目所有之前进行初始化 -->
+        <after>
+            <others/>
+        </after>
+    </ordering>
+
+
+</web-fragment>

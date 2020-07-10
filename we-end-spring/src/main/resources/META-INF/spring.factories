@@ -1,0 +1,7 @@
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+com.github.xwine.end.spring.spi.BootstrapSpringListener
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.github.xwine.end.spring.boot.MockWebAutoConfiguration
