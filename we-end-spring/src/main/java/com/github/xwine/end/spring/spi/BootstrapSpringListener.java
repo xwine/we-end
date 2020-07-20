@@ -30,7 +30,6 @@ public class BootstrapSpringListener implements ApplicationContextInitializer<Co
             MockMethodAdvise mockMethodAdvise = new MockMethodAdvise();
             DefaultPointcutAdvisor mockAdvisor = new DefaultPointcutAdvisor(mockMethodPointcut,mockMethodAdvise);
             beanFactory.registerSingleton("mockAdvisor",mockAdvisor);
-//            beanFactory.registerSingleton("mockJsfFilter",new MockJsfFilter());
         }
 
         @Override

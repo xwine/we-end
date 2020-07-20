@@ -6,13 +6,18 @@
 
     <groupId>com.github.xwine</groupId>
     <artifactId>we-end</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
+    <description>This is a object mock tools </description>
+    <url>https://github.com/xwine/we-end</url>
     <modules>
         <module>we-end-mock</module>
         <module>we-end-spring</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
     </properties>
     <dependencyManagement>
@@ -87,23 +92,56 @@
         </dependencies>
     </dependencyManagement>
 
+    <developers>
+        <developer>
+            <name>xwine</name>
+            <email>xwinej@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>The MIT License</name>
+            <url>http://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:git@github.com:xwine/we-end.git</connection>
+        <developerConnection>scm:git:git@github.com:xwine/we-end.git</developerConnection>
+        <url>git@github.com:xwine/we-end.git</url>
+        <tag>we-end-1.1</tag>
+    </scm>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; 本地开发环境 &ndash;&gt;-->
+<!--            <id>dev</id>-->
+<!--            <properties>-->
+<!--                <profiles.active>dev</profiles.active>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash;打包环境&ndash;&gt;-->
+<!--            <id>release</id>-->
+<!--            <properties>-->
+<!--                <profiles.active>release</profiles.active>-->
+<!--            </properties>-->
+<!--            &lt;!&ndash;定义snapshots库和releases库的nexus地址&ndash;&gt;-->
+<!--            <distributionManagement>-->
+<!--                <snapshotRepository>-->
+<!--                    &lt;!&ndash;oss需要对应到settings.xml下的service的id&ndash;&gt;-->
+<!--                    <id>oss</id>-->
+<!--                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
+<!--                </snapshotRepository>-->
+<!--                <repository>-->
+<!--                    <id>oss</id>-->
+<!--                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--                </repository>-->
+<!--            </distributionManagement>-->
+<!--        </profile>-->
+<!--    </profiles>-->
     <build>
-        <defaultGoal>package</defaultGoal>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+            <!--编译插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -112,19 +150,56 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <!--生产源码文件插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.0.0</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
+                        <phase>compile</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+            <!--生产javadoc插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--gpg加密插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
+
 </project>
