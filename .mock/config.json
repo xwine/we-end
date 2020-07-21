@@ -1,0 +1,24 @@
+{
+  "mockOn": true,
+  "appName": "we-end",
+  "nowUser": "chenjunjun",
+  "path": "/Users/chenjunjun/codes/github/we-end/.mock",
+  "localCacheSwitch": false,
+  "remoteCacheSwitch": true,
+  "idCachePath": "data",
+  "template": "type",
+  "templateString": "abc",
+  "templateInteger": 123,
+  "templateLong": 12345,
+  "templateDouble": 1111111.0,
+  "templateFloat": 12345.0,
+  "templateBigDecimal": 2020,
+  "templateBoolean": true,
+  "templateCharacter": "o",
+  "templateByte": 1,
+  "templateDate": "Jul 21, 2020 10:43:14 AM",
+  "consolePrefix": "/console",
+  "mockClasses": [
+    "com.github.xwine.end.test.service"
+  ]
+}
