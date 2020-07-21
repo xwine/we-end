@@ -25,8 +25,6 @@ public class HostNameProcessor implements Processor {
         result.put("hostName", hostName);
         result.put("appName", MockContext.getConfig().getAppName());
         result.put("userName", MockContext.getConfig().getNowUser());
-
-        result.put("ftp", MockContext.getConfig().getFtpHost());
         return result;
     }
 }

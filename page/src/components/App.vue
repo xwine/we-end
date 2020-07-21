@@ -100,8 +100,7 @@ color: rgb(251, 251, 251);
         activeIndex: 'c4',
         appName: '',
         userName:'',
-        hostIp: '127.0.0.1',
-        ftp: ''
+        hostIp: '127.0.0.1'
       };
     },
     methods: {
@@ -125,8 +124,6 @@ color: rgb(251, 251, 251);
           that.appName = res.body.appName;
           that.GLB.userName = res.body.userName;
           that.userName = res.body.userName;
-          that.GLB.ftp = res.body.ftp;
-          that.ftp = res.body.ftp;
         } else{
           that.hostIp = '1.1.1.1';
           that.userName = 'spring';

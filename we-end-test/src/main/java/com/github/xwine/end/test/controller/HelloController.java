@@ -13,7 +13,7 @@ public class HelloController {
     HelloEnd helloEnd;
 
     @RequestMapping("fetch")
-    public String fetch() {
+    public Object fetch() {
         return helloEnd.fetch();
     }
 }

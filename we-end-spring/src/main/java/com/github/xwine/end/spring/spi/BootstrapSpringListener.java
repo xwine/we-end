@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 
+import java.util.Iterator;
+import java.util.ServiceLoader;
+
 public class BootstrapSpringListener implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     private static volatile boolean initialized;
 
@@ -30,6 +33,13 @@ public class BootstrapSpringListener implements ApplicationContextInitializer<Co
             MockMethodAdvise mockMethodAdvise = new MockMethodAdvise();
             DefaultPointcutAdvisor mockAdvisor = new DefaultPointcutAdvisor(mockMethodPointcut,mockMethodAdvise);
             beanFactory.registerSingleton("mockAdvisor",mockAdvisor);
+            ServiceLoader<MockFileService> mockFileServices = ServiceLoader.load(MockFileService.class);
+            Iterator<MockFileService> iterator = mockFileServices.iterator();
+            if (iterator.hasNext()) {
+                beanFactory.registerSingleton("mockFileService", iterator.next());
+            } else {
+                MockContext.LOG.error("[O-Mock] can not find remote mock server config");
+            }
         }
 
         @Override

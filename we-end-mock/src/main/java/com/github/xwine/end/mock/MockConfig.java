@@ -7,15 +7,15 @@ import java.util.List;
 
 public class MockConfig {
 
+    /**
+     *  open or close mock
+     */
+    private Boolean mockOn = false;
     private String appName;
     private String nowUser;
     private String path;
-    private boolean localCacheSwitch = true;
+    private boolean localCacheSwitch = false;
     private boolean remoteCacheSwitch = true;
-    private String ftpHost = "10.170.148.15";
-    private Integer ftpPort = 21;
-    private String userName = "friday";
-    private String password = "20200313";
     private String idCachePath = "data";
     private String template = "type";
     private String templateString = "abc";
@@ -28,11 +28,18 @@ public class MockConfig {
     private Character templateCharacter = 'o';
     private Byte templateByte = new Byte("1");
     private Date templateDate = new Date();
-    private Boolean mockOn = false;
     private String consolePrefix = "/console";
     private List<String> mockClasses = new ArrayList<>();
 
     public MockConfig() {
+    }
+
+    public Boolean getMockOn() {
+        return mockOn;
+    }
+
+    public void setMockOn(Boolean mockOn) {
+        this.mockOn = mockOn;
     }
 
     public String getAppName() {
@@ -73,38 +80,6 @@ public class MockConfig {
 
     public void setRemoteCacheSwitch(boolean remoteCacheSwitch) {
         this.remoteCacheSwitch = remoteCacheSwitch;
-    }
-
-    public String getFtpHost() {
-        return ftpHost;
-    }
-
-    public void setFtpHost(String ftpHost) {
-        this.ftpHost = ftpHost;
-    }
-
-    public Integer getFtpPort() {
-        return ftpPort;
-    }
-
-    public void setFtpPort(Integer ftpPort) {
-        this.ftpPort = ftpPort;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getIdCachePath() {
@@ -203,14 +178,6 @@ public class MockConfig {
         this.templateDate = templateDate;
     }
 
-    public Boolean getMockOn() {
-        return mockOn;
-    }
-
-    public void setMockOn(Boolean mockOn) {
-        this.mockOn = mockOn;
-    }
-
     public String getConsolePrefix() {
         return consolePrefix;
     }
@@ -230,15 +197,12 @@ public class MockConfig {
     @Override
     public String toString() {
         return "MockConfig{" +
-                "appName='" + appName + '\'' +
+                "mockOn=" + mockOn +
+                ", appName='" + appName + '\'' +
                 ", nowUser='" + nowUser + '\'' +
                 ", path='" + path + '\'' +
                 ", localCacheSwitch=" + localCacheSwitch +
                 ", remoteCacheSwitch=" + remoteCacheSwitch +
-                ", ftpHost='" + ftpHost + '\'' +
-                ", ftpPort=" + ftpPort +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
                 ", idCachePath='" + idCachePath + '\'' +
                 ", template='" + template + '\'' +
                 ", templateString='" + templateString + '\'' +
@@ -251,7 +215,6 @@ public class MockConfig {
                 ", templateCharacter=" + templateCharacter +
                 ", templateByte=" + templateByte +
                 ", templateDate=" + templateDate +
-                ", mockOn=" + mockOn +
                 ", consolePrefix='" + consolePrefix + '\'' +
                 ", mockClasses=" + mockClasses +
                 '}';

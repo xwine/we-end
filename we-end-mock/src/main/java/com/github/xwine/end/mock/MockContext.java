@@ -84,7 +84,7 @@ public class MockContext {
                 return paths[paths.length-2];
             }
         } catch (Exception e) {}
-        return System.getProperty(IConst.PROD_DATA_FETCH_APP,"util-end");
+        return System.getProperty(IConst.PROD_DATA_FETCH_APP,"we-end");
     }
 
     public static String getNowUser() {

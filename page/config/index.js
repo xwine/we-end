@@ -55,10 +55,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../util-end-spring/src/main/resources'),
+    index: path.resolve(__dirname, '../../we-end-spring/src/main/resources'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../util-end-spring/src/main/resources/static'),
+    assetsRoot: path.resolve(__dirname, '../../we-end-spring/src/main/resources/static'),
     assetsSubDirectory: 'assets',
     assetsPublicPath: './static/',
 
