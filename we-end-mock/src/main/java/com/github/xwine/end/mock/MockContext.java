@@ -28,7 +28,7 @@ public class MockContext {
 
     public static void initEnv() {
         List<String> supportOs = new ArrayList<>();
-//        supportOs.add("Mac OS X");
+        supportOs.add("Mac OS X");
         supportOs.add("Windows 7");
         supportOs.add("Windows 8");
         supportOs.add("Windows 10");
