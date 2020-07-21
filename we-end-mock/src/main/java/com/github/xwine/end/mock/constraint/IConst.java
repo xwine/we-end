@@ -11,5 +11,7 @@ public interface IConst {
     public static final String CLOSE_CACHE = "close_object_mock_cache";
     public static final boolean CLOSE_CACHE_DEFAULT = false;
     public static final boolean OPEN_MOCK_DEFAULT = false;
-    public static final String PROD_DATA_FETCH_APP="mock.data.fetch.app";
+    public static final String PROD_DATA_CONFIG_APP_NAME="mock.config.projectName";
+    public static final String PROD_DATA_CONFIG_MOCK_ON="mock.config.mockOn";
+    public static final String PROD_DATA_CONFIG_PATH="mock.config.path";
 }

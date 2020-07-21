@@ -1,5 +1,7 @@
 package com.github.xwine.end.mock;
 
+import com.github.xwine.end.mock.constraint.IConst;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -218,5 +220,26 @@ public class MockConfig {
                 ", consolePrefix='" + consolePrefix + '\'' +
                 ", mockClasses=" + mockClasses +
                 '}';
+    }
+
+
+    public static String initNowUser() {
+        return System.getProperty("user.name","no-name");
+    }
+
+    public static boolean initMockOn() {
+        String mockOn = System.getProperty(IConst.PROD_DATA_CONFIG_MOCK_ON,"false");
+        if ("true".equals(mockOn)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static String initAppName() {
+        return System.getProperty(IConst.PROD_DATA_CONFIG_APP_NAME,"we-end");
+    }
+
+    public static String initPath() {
+        return System.getProperty(IConst.PROD_DATA_CONFIG_PATH,"/export/data/mock");
     }
 }

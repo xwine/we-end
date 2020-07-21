@@ -77,14 +77,19 @@ public class MockContext {
         return  "/" + IConst.MOCK_FILE_NAME;
     }
 
-    public static String getAppName() {
+    /**
+     * 获取项目名
+     * @param dir
+     * @return
+     */
+    public static String getProjectName(String dir) {
         try {
-            String[] paths =getDirPath().split("/");
+            String[] paths =dir.split("/");
             if (paths != null && paths.length > 1) {
                 return paths[paths.length-2];
             }
         } catch (Exception e) {}
-        return System.getProperty(IConst.PROD_DATA_FETCH_APP,"we-end");
+        return MockConfig.initAppName();
     }
 
     public static String getNowUser() {
@@ -101,13 +106,17 @@ public class MockContext {
             if (configCache != null) {
                 return configCache;
             }
-            String mockDir = getDirPath();
-            if (StringUtils.isEmpty(mockDir)) {
+            //非本地开发环境
+            if (ENV_DEV == false) {
                 MockConfig mockConfig = new MockConfig();
-                mockConfig.setAppName(getAppName());
-                mockConfig.setNowUser(getNowUser());
-                return mockConfig;
+                mockConfig.setAppName(MockConfig.initAppName());
+                mockConfig.setNowUser(MockConfig.initNowUser());
+                mockConfig.setMockOn(MockConfig.initMockOn());
+                mockConfig.setPath(MockConfig.initPath());
+                configCache = mockConfig;
+                return configCache;
             }
+            String mockDir = getDirPath();
             File dic = new File(mockDir);
             if (dic.exists()) {
                 String path = mockDir + "/" + "config.json";
@@ -118,8 +127,8 @@ public class MockContext {
                     //文件不存在，初始化文件内容
                     MockConfig mockConfig = new MockConfig();
                     mockConfig.setPath(mockDir);
-                    mockConfig.setAppName(getAppName());
-                    mockConfig.setNowUser(getNowUser());
+                    mockConfig.setAppName(getProjectName(mockDir));
+                    mockConfig.setNowUser(MockConfig.initNowUser());
                     if (ENV_DEV) {
                         mockConfig.setMockOn(true);
                     }
