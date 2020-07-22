@@ -6,7 +6,7 @@
 
     <groupId>com.github.xwine</groupId>
     <artifactId>we-end</artifactId>
-    <version>1.3</version>
+    <version>1.3.2</version>
     <description>This is a object mock tools </description>
     <url>https://github.com/xwine/we-end</url>
     <modules>
