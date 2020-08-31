@@ -2,6 +2,7 @@ package com.github.xwine.end.spring.spi;
 
 import com.github.xwine.end.spring.WebEndFilter;
 import com.github.xwine.end.mock.MockContext;
+import com.github.xwine.end.mock.util.PropertiesUtil;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.DispatcherType;
@@ -21,6 +22,7 @@ public class BootstrapServletListener implements WebApplicationInitializer {
         if (filterAppended) {
             return;
         }
+
         if (MockContext.getConfig().getMockOn()) {
             FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("webEndFilter", new WebEndFilter());
             if (filterRegistration != null) {

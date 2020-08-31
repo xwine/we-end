@@ -14,4 +14,8 @@ public interface IConst {
     public static final String PROD_DATA_CONFIG_APP_NAME="mock.config.projectName";
     public static final String PROD_DATA_CONFIG_MOCK_ON="mock.config.mockOn";
     public static final String PROD_DATA_CONFIG_PATH="mock.config.path";
+    public static final String MOCK_PROPERTIES_MOCK_ON = "we.end.mock.on";
+    public static final String MOCK_PROPERTIES_OPEN_RECORD = "we.end.open.record";
+    public static final String MOCK_PROPERTIES_APP_NAME = "we.end.project.name";
+    public static final String MOCK_PROPERTIES_CONFIG_PATH = "we.end.config.path";
 }

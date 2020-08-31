@@ -3,6 +3,7 @@ package com.github.xwine.end.spring.spi;
 import com.github.xwine.end.mock.MockContext;
 import com.github.xwine.end.spring.aop.MockMethodAdvise;
 import com.github.xwine.end.spring.aop.MockMethodPointcut;
+import com.github.xwine.end.mock.util.PropertiesUtil;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -19,7 +20,11 @@ public class BootstrapSpringListener implements ApplicationContextInitializer<Co
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-        if (!initialized && MockContext.getConfig().getMockOn()) {
+        if (initialized) {
+            return;
+        }
+        //本地开发或者 配置文件属性开启
+        if (MockContext.getConfig().getMockOn()) {
             applicationContext.addBeanFactoryPostProcessor(new BeanRegister());
             initialized = true;
         }

@@ -13,9 +13,9 @@ public class MockConfig {
      *  open or close mock
      */
     private Boolean mockOn = false;
-    private String appName;
-    private String nowUser;
-    private String path;
+    private String appName = "we-end";
+    private String nowUser = "no-name";
+    private String path = "/export/data/mock";
     private boolean localCacheSwitch = false;
     private boolean remoteCacheSwitch = true;
     private String idCachePath = "data";

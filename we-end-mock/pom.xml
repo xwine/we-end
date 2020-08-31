@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <groupId>com.github.xwine</groupId>
-    <version>1.3.2</version>
+    <groupId>com.jd.rd.man</groupId>
+    <version>1.3.3-SNAPSHOT</version>
     <artifactId>we-end-mock</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <dependencies>
@@ -69,16 +69,28 @@
                 <java.version>1.8</java.version>
             </properties>
             <!--定义snapshots库和releases库的nexus地址-->
+<!--            <distributionManagement>-->
+<!--                <snapshotRepository>-->
+<!--                    &lt;!&ndash;oss需要对应到settings.xml下的service的id&ndash;&gt;-->
+<!--                    <id>oss</id>-->
+<!--                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
+<!--                </snapshotRepository>-->
+<!--                <repository>-->
+<!--                    <id>oss</id>-->
+<!--                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+<!--                </repository>-->
+<!--            </distributionManagement>-->
             <distributionManagement>
-                <snapshotRepository>
-                    <!--oss需要对应到settings.xml下的service的id-->
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
                 <repository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>jd-central</id>
+                    <name>libs-releases</name>
+                    <url>http://artifactory.jd.com/libs-releases-local</url>
                 </repository>
+                <snapshotRepository>
+                    <id>jd-snapshots</id>
+                    <name>libs-snapshots</name>
+                    <url>http://artifactory.jd.com/libs-snapshots-local</url>
+                </snapshotRepository>
             </distributionManagement>
         </profile>
     </profiles>

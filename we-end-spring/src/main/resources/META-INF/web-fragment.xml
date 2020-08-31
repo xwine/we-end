@@ -7,7 +7,7 @@
 
     <context-param>
         <param-name>contextInitializerClasses</param-name>
-        <param-value>com.github.xwine.util.spring.spi.BootstrapSpringListener</param-value>
+        <param-value>com.github.xwine.end.spring.spi.BootstrapSpringListener</param-value>
     </context-param>
     <!-- 表示一个执行序列  -->
     <ordering>
