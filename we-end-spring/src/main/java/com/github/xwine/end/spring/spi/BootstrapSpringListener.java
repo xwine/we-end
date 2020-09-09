@@ -23,27 +23,27 @@ public class BootstrapSpringListener implements ApplicationContextInitializer<Co
         if (initialized) {
             return;
         }
-        //本地开发或者 配置文件属性开启
-        if (MockContext.getConfig().getMockOn()) {
-            applicationContext.addBeanFactoryPostProcessor(new BeanRegister());
-            initialized = true;
-        }
+        applicationContext.addBeanFactoryPostProcessor(new BeanRegister());
+        initialized = true;
     }
 
     private static class BeanRegister implements BeanFactoryPostProcessor, Ordered {
         @Override
         public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
-            MockMethodPointcut mockMethodPointcut = new MockMethodPointcut();
-            MockMethodAdvise mockMethodAdvise = new MockMethodAdvise();
-            DefaultPointcutAdvisor mockAdvisor = new DefaultPointcutAdvisor(mockMethodPointcut,mockMethodAdvise);
-            beanFactory.registerSingleton("mockAdvisor",mockAdvisor);
-            ServiceLoader<MockFileService> mockFileServices = ServiceLoader.load(MockFileService.class);
-            Iterator<MockFileService> iterator = mockFileServices.iterator();
-            if (iterator.hasNext()) {
-                beanFactory.registerSingleton("mockFileService", iterator.next());
-            } else {
-                MockContext.LOG.error("[O-Mock] can not find remote mock server config");
+            if (MockContext.getConfig().getWeEndOn()) {
+                ServiceLoader<MockFileService> mockFileServices = ServiceLoader.load(MockFileService.class);
+                Iterator<MockFileService> iterator = mockFileServices.iterator();
+                if (iterator.hasNext()) {
+                    beanFactory.registerSingleton("mockFileService", iterator.next());
+                } else {
+                    MockContext.LOG.error("[O-Mock] can not find remote mock server config");
+                }
+            }
+            if (MockContext.getConfig().getMockOn()) {
+                MockMethodPointcut mockMethodPointcut = new MockMethodPointcut();
+                MockMethodAdvise mockMethodAdvise = new MockMethodAdvise();
+                DefaultPointcutAdvisor mockAdvisor = new DefaultPointcutAdvisor(mockMethodPointcut,mockMethodAdvise);
+                beanFactory.registerSingleton("mockAdvisor",mockAdvisor);
             }
         }
 

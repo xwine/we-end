@@ -3,7 +3,11 @@
         <div class="block" v-loading="loading"
              element-loading-text="加载中..........."
              element-loading-background="rgba(255, 255, 255, 0.7)">
-
+            <el-button style="float: right"  icon="el-icon-upload"
+                        size="mini"
+                        type="text"
+                        @click="batchUpload"
+            >批量上传</el-button>
             <el-table
                     :data="tableData.filter(data => !search || data.fileName.toLowerCase().includes(search.toLowerCase()))"
                     stripe
@@ -65,6 +69,35 @@
             this.loadInterfaces()
         },
         methods: {
+            batchUpload() {
+                var that = this
+                this.loading = true
+                this.$http.post(that.GLB.batch_upload).then(response => {
+                    if (response.body.message) {
+                        that.loading = false
+                        that.$notify({
+                            title: '批量上传结果',
+                            message: response.body.message,
+                            type: 'error'
+                        });
+                    } else {
+                        that.loading = false
+                        that.$notify({
+                            title: '批量上传结果',
+                            message: '批量上传失败，服务器异常',
+                            type: 'error'
+                        });
+                    }
+
+                }, err => {
+                    that.loading = false
+                    that.$notify({
+                        title: '异常',
+                        message: '加载错误',
+                        type: 'error'
+                    });
+                });
+            },
             fetchFileData(index, row) {
                 var that = this
                 if (row.fileName.endWith(".json")) {

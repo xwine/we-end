@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FtpMockServer implements MockFileService {
     private static FTPClient ftp = null;
-    private static String ftpHost = "127.0.0.1";
+    private static String ftpHost = "10.170.148.15";
     private static Integer ftpPort = 21;
     private static String userName = "friday";
     private static String password = "20200313";
@@ -225,6 +225,41 @@ public class FtpMockServer implements MockFileService {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean batchUploadFile() {
+        try {
+            String dicPath = MockContext.getConfig().getPath() + "/" + MockContext.getConfig().getIdCachePath();
+            //上传文件
+            File file = new File(dicPath);
+            if (file.exists() && file.isDirectory()) {
+                File[] files = file.listFiles();
+                for (File f : files) {
+                    if (f.exists() && f.getName().endsWith(".json")) {
+                        this.uploadFile(f.getName());
+                    }
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            MockContext.LOG.error("[O-MOCK] batch upload exception");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean batchDownloadFile(String dic) {
+        try {
+            List<String> fileTree = this.fetchFiles(dic);
+            for (String s : fileTree) {
+                this.downloadFile(dic, s);
+            }
+            return true;
+        } catch (Exception e) {
+            MockContext.LOG.error("[O-MOCK] batch download exception");
+        }
+        return false;
     }
 
 

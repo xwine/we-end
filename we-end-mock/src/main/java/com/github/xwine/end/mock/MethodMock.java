@@ -14,7 +14,7 @@ public class MethodMock {
                 if (m.getName().equals(methodName)) {
                     String id = className + "_" + methodName;
                     Type type = m.getAnnotatedReturnType().getType();
-                    Object object = ObjectMock.getObjectAndCache(id,type, 4);
+                    Object object = ObjectMock.getObjectAndCache(id,type, MockContext.getConfig().getDeep());
                     return object;
                 }
             }

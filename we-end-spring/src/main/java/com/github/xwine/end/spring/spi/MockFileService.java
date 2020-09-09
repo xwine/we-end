@@ -30,4 +30,14 @@ public interface MockFileService {
     boolean downloadFile(String dic, String fileName);
 
     String fetchFileContent(String dic, String fileName);
+
+
+    /**
+     * 批量上传文件
+     * @return
+     */
+    boolean batchUploadFile();
+
+
+    boolean batchDownloadFile(String dic);
 }

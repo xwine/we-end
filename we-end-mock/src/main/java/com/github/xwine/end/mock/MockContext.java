@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,19 @@ public class MockContext {
        initEnv();
     }
 
-    public static void initEnv() {
+    private static void initEnv() {
+        String openWeEnd = System.getProperty(IConst.JVM_ENV_PROPERTY);
+        if (StringUtils.isNotEmpty(openWeEnd)) {
+            if ("true".equals(openWeEnd)) {
+                ENV_DEV = true;
+                return;
+            }
+            if ("false".equals(openWeEnd)) {
+                ENV_DEV = false;
+                return;
+            }
+        }
+        // 检测到环境是mac os 或者 windows 则默认开启we end
         List<String> supportOs = new ArrayList<>();
         supportOs.add("Mac OS X");
         supportOs.add("Windows 7");
@@ -43,7 +56,7 @@ public class MockContext {
      * get absolute path by classloader
      * @return
      */
-    public static String getDirPath() {
+    private static String getDirPath() {
         if (MockContext.class.getClassLoader().getResource("") != null) {
             String projectPath = MockContext.class.getClassLoader().getResource("").getPath();
             if (StringUtils.isEmpty(projectPath)) {
@@ -83,7 +96,7 @@ public class MockContext {
      * @param dir
      * @return
      */
-    public static String getProjectName(String dir) {
+    private static String getProjectName(String dir) {
         try {
             String[] paths =dir.split("/");
             if (paths != null && paths.length > 1) {
@@ -91,10 +104,6 @@ public class MockContext {
             }
         } catch (Exception e) {}
         return MockConfig.initAppName();
-    }
-
-    public static String getNowUser() {
-        return System.getProperty("user.name","");
     }
 
     /**
@@ -107,47 +116,12 @@ public class MockContext {
             if (configCache != null) {
                 return configCache;
             }
-            //如果本地，走config.json配置
+            //如果开发环境，走config.json配置
             if (ENV_DEV) {
-                String mockDir = getDirPath();
-                File dic = new File(mockDir);
-                if (dic.exists()) {
-                    String path = mockDir + "/" + "config.json";
-                    File file = new File(path);
-                    if (!file.exists()) {
-                        //第一次创建配置文件
-                        LOG.info("[O-MOCK] First use ?,Auto create config.json file...");
-                        //文件不存在，初始化文件内容
-                        MockConfig mockConfig = new MockConfig();
-                        mockConfig.setPath(mockDir);
-                        mockConfig.setAppName(getProjectName(mockDir));
-                        mockConfig.setNowUser(MockConfig.initNowUser());
-                        mockConfig.setMockOn(true);
-                        JsonElement jsonElement = JsonUtils.toJsonTree(mockConfig);
-                        FileUtils.saveJsonToFile(jsonElement, path);
-                        //缓存配置
-                        configCache = mockConfig;
-                        return configCache;
-                    } else {
-                        //之前创建过配置文件
-                        JsonElement jsonElement = FileUtils.getObjectFromFile(path);
-                        Object config = JsonUtils.fromJson(jsonElement, MockConfig.class);
-                        if (config instanceof MockConfig) {
-                            //缓存配置
-                            configCache =  (MockConfig) config;
-                            return configCache;
-                        }
-                    }
-                }
+                return fetchDevConfig();
             } else {
-                //线上走mock.properties配置
-                MockConfig mockConfig = new MockConfig();
-                mockConfig.setAppName(PropertiesUtil.PROJECT_NAME);
-                mockConfig.setNowUser(MockConfig.initNowUser());
-                mockConfig.setMockOn(PropertiesUtil.MOCK_ON);
-                mockConfig.setPath(PropertiesUtil.PATH);
-                configCache = mockConfig;
-                return configCache;
+                //特殊环境 比如测试及预发布 走单独配置
+                return specialEnvConfig();
             }
         } catch (Exception e) {
             MockContext.LOG.error("[O-MOCK][read config.json error ,all config use default]");
@@ -155,9 +129,65 @@ public class MockContext {
         return new MockConfig();
     }
 
+    private static MockConfig fetchDevConfig() {
+        String mockDir = getDirPath();
+        File dic = new File(mockDir);
+        if (dic.exists()) {
+            String path = mockDir + "/" + "config.json";
+            File file = new File(path);
+            if (!file.exists()) {
+                //第一次创建配置文件
+                LOG.info("[O-MOCK] First use ?,Auto create config.json file...");
+                //文件不存在，初始化文件内容
+                MockConfig mockConfig = new MockConfig();
+                mockConfig.setPath(mockDir);
+                mockConfig.setAppName(getProjectName(mockDir));
+                mockConfig.setNowUser(MockConfig.initNowUser());
+                mockConfig.setMockOn(true);
+                mockConfig.setWeEndOn(true);
+                JsonElement jsonElement = JsonUtils.toJsonTree(mockConfig);
+                FileUtils.saveJsonToFile(jsonElement, path);
+                //缓存配置
+                configCache = mockConfig;
+                return configCache;
+            } else {
+                //之前创建过配置文件
+                JsonElement jsonElement = FileUtils.getObjectFromFile(path);
+                Object config = JsonUtils.fromJson(jsonElement, MockConfig.class);
+                if (config instanceof MockConfig) {
+                    //缓存配置
+                    configCache =  (MockConfig) config;
+                    return configCache;
+                }
+            }
+        }
+        return new MockConfig();
+    }
+
+    private static MockConfig specialEnvConfig() {
+        try {
+            URL url = MockContext.class.getResource("/config.json");
+            if (url == null) {
+                MockContext.LOG.info("[O-MOCK][special config.json not find ,all config use default]");
+                return new MockConfig();
+            }
+            //之前创建过配置文件
+            JsonElement jsonElement = FileUtils.getObjectFromFile(url.getFile());
+            Object config = JsonUtils.fromJson(jsonElement, MockConfig.class);
+            if (config instanceof MockConfig) {
+                //缓存配置
+                configCache = (MockConfig) config;
+                return configCache;
+            }
+        } catch (Exception e) {
+            MockContext.LOG.error("[O-MOCK][read special config.json error ,all config use default]");
+        }
+        return new MockConfig();
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(getConfig().toString());
+        System.out.println(specialEnvConfig().toString());
     }
 
 

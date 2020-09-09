@@ -12,10 +12,12 @@ public class MockConfig {
     /**
      *  open or close mock
      */
+    private Boolean weEndOn = false;
     private Boolean mockOn = false;
     private String appName = "we-end";
     private String nowUser = "no-name";
     private String path = "/export/data/mock";
+    private Integer deep = 4;
     private boolean localCacheSwitch = false;
     private boolean remoteCacheSwitch = true;
     private String idCachePath = "data";
@@ -196,13 +198,33 @@ public class MockConfig {
         this.mockClasses = mockClasses;
     }
 
+    public Boolean getWeEndOn() {
+        return weEndOn;
+    }
+
+    public MockConfig setWeEndOn(Boolean weEndOn) {
+        this.weEndOn = weEndOn;
+        return this;
+    }
+
+    public Integer getDeep() {
+        return deep;
+    }
+
+    public MockConfig setDeep(Integer deep) {
+        this.deep = deep;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "MockConfig{" +
-                "mockOn=" + mockOn +
+                "weEndOn=" + weEndOn +
+                ", mockOn=" + mockOn +
                 ", appName='" + appName + '\'' +
                 ", nowUser='" + nowUser + '\'' +
                 ", path='" + path + '\'' +
+                ", deep=" + deep +
                 ", localCacheSwitch=" + localCacheSwitch +
                 ", remoteCacheSwitch=" + remoteCacheSwitch +
                 ", idCachePath='" + idCachePath + '\'' +
@@ -221,7 +243,6 @@ public class MockConfig {
                 ", mockClasses=" + mockClasses +
                 '}';
     }
-
 
     public static String initNowUser() {
         return System.getProperty("user.name","no-name");

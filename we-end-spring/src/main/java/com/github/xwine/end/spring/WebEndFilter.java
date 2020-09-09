@@ -11,10 +11,8 @@ import com.github.xwine.end.spring.processor.beans.CallProcessor;
 import com.github.xwine.end.spring.processor.beans.GetBeanNameProcessor;
 import com.github.xwine.end.spring.processor.beans.GetMethodsProcessor;
 import com.github.xwine.end.spring.processor.beans.GetParamsProcessor;
-import com.github.xwine.end.spring.processor.ftp.DownloadProcessor;
-import com.github.xwine.end.spring.processor.ftp.GetRemoteDataProcessor;
-import com.github.xwine.end.spring.processor.ftp.GetRemoteDicProcessor;
-import com.github.xwine.end.spring.processor.ftp.GetRemoteUserProcessor;
+import com.github.xwine.end.spring.processor.ftp.*;
+import com.github.xwine.end.spring.processor.loc.BatchUploadProcessor;
 import com.github.xwine.end.spring.processor.loc.GetLocDataProcessor;
 import com.github.xwine.end.spring.processor.loc.GetLocDicProcessor;
 import com.github.xwine.end.spring.processor.loc.UploadProcessor;
@@ -59,10 +57,12 @@ public class WebEndFilter implements Filter {
         processMap.put("/getLocDic.json", new GetLocDicProcessor());
         processMap.put("/getLocData.json", new GetLocDataProcessor());
         processMap.put("/mockUpload.json", new UploadProcessor());
+        processMap.put("/batchUpload.json", new BatchUploadProcessor());
         processMap.put("/getRemoteDic.json", new GetRemoteDicProcessor());
         processMap.put("/getRemoteUser.json", new GetRemoteUserProcessor());
         processMap.put("/getRemoteData.json", new GetRemoteDataProcessor());
         processMap.put("/mockDownload.json", new DownloadProcessor());
+        processMap.put("/batchDownload.json", new BatchDownloadProcessor());
     }
 
     /**

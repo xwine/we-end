@@ -23,7 +23,7 @@ public class BootstrapServletListener implements WebApplicationInitializer {
             return;
         }
 
-        if (MockContext.getConfig().getMockOn()) {
+        if (MockContext.getConfig().getWeEndOn()) {
             FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("webEndFilter", new WebEndFilter());
             if (filterRegistration != null) {
                 filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, MockContext.getConfig().getConsolePrefix() + "/*");
