@@ -39,10 +39,13 @@ public class BootstrapSpringListener implements ApplicationContextInitializer<Co
                 }
             }
             if (MockContext.getConfig().getMockOn()) {
+                MockContext.LOG.info("[O-Mock] mock on !!!");
                 MockMethodPointcut mockMethodPointcut = new MockMethodPointcut();
                 MockMethodAdvise mockMethodAdvise = new MockMethodAdvise();
                 DefaultPointcutAdvisor mockAdvisor = new DefaultPointcutAdvisor(mockMethodPointcut,mockMethodAdvise);
                 beanFactory.registerSingleton("mockAdvisor",mockAdvisor);
+            } else {
+                MockContext.LOG.info("[O-Mock] mock off !!!");
             }
         }
 

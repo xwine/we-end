@@ -23,11 +23,14 @@ public class BootstrapServletListener implements WebApplicationInitializer {
         }
 
         if (MockContext.getConfig().getWeEndOn()) {
+            MockContext.LOG.warn("[O-MOCK][ we end filter on  ！！！]");
             FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("webEndFilter", new WebEndFilter());
             if (filterRegistration != null) {
                 filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, MockContext.getConfig().getConsolePrefix() + "/*");
                 filterAppended = true;
             }
+        } else {
+            MockContext.LOG.info("[O-MOCK][we end off ！！！]");
         }
     }
 }

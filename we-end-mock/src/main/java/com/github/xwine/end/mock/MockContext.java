@@ -30,6 +30,11 @@ public class MockContext {
         if (StringUtils.isNotEmpty(configPath)) {
             CONFIG_PATH = configPath;
         }
+        String envDev = System.getProperty(VMEnum.ENV_DEV.getKey());
+        if (StringUtils.isNotBlank(envDev) && Boolean.TRUE.toString().equals(envDev)) {
+            ENV_DEV = true;
+            return;
+        }
         String osName = System.getProperty(VMEnum.OS_NAME.getKey());
         if (StringUtils.isNotBlank(osName) && OSEnum.contains(osName)) {
             ENV_DEV = true;
@@ -46,6 +51,8 @@ public class MockContext {
             if (configCache != null) {
                 return configCache;
             }
+            MockContext.LOG.info("[O-MOCK][welcome to use we end mock]");
+
             //vm 是否配置path
             if (StringUtils.isNotEmpty(CONFIG_PATH)) {
                 configCache = fetchConfig(CONFIG_PATH);

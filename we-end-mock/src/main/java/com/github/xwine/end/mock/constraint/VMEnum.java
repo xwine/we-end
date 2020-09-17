@@ -26,7 +26,9 @@ public enum VMEnum {
      * user
      * JRE 默认带该参数，不用显示指定
      */
-    USER_NAME("user.name","null");
+    USER_NAME("user.name","null"),
+
+    ENV_DEV("we.end.env","null");
 
     public String getKey() {
         return key;
