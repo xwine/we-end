@@ -2,7 +2,6 @@ package com.github.xwine.end.spring.aop;
 
 import com.github.xwine.end.mock.MethodMock;
 import com.github.xwine.end.mock.MockContext;
-import com.github.xwine.end.mock.util.PropertiesUtil;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 

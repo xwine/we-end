@@ -3,7 +3,6 @@ package com.github.xwine.end.spring.spi;
 import com.github.xwine.end.mock.MockContext;
 import com.github.xwine.end.spring.aop.MockMethodAdvise;
 import com.github.xwine.end.spring.aop.MockMethodPointcut;
-import com.github.xwine.end.mock.util.PropertiesUtil;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

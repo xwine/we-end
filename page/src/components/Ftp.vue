@@ -52,14 +52,16 @@
             >批量下载
             </el-button>
             <el-table
-                    :data="tableData.filter(data => !search || data.fileName.toLowerCase().includes(search.toLowerCase()))"
+                    :data="tableData.filter(data => !search || data.fileName.toLowerCase().includes(search.toLowerCase())).slice((this.page - 1) * this.size, (this.page - 1) * this.size + this.size)"
                     stripe
                     style="width: 100%"
                     v-show="showUser == false"
             >
                 <el-table-column
-                        label="ID"
-                        type="index">
+                        label="ID">
+                    <template slot-scope="scope">
+                        {{scope.$index+1+(page-1)*size}}
+                    </template>
                 </el-table-column>
                 <el-table-column
                         prop="date"
@@ -76,6 +78,7 @@
                         <el-input
                                 v-model="search"
                                 size="mini"
+                                @input="changeSearch"
                                 placeholder="输入关键字搜索"/>
                     </template>
                     <template slot-scope="scope">
@@ -93,8 +96,18 @@
                         </el-button>
                     </template>
                 </el-table-column>
-
             </el-table>
+            <div v-show="showUser == false" style="text-align: left; margin-top: 20px">
+                <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page="page"
+                        :page-sizes="[10, 20, 50, 100]"
+                        :page-size="size"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="this.tableData.length">
+                </el-pagination>
+            </div>
         </div>
         <el-dialog title="JSON文件" footer-padding="10px 30px 15px" :visible.sync="dialogFormVisible" width="60%"
                    min-height="50px" max-height="400px">
@@ -114,6 +127,17 @@
             this.loadInterfaces()
         },
         methods: {
+            changeSearch() {
+               this.page=1
+            },
+            // 修改页大小
+            handleSizeChange(val) {
+                this.size = val;
+            },
+            // 修改页码
+            handleCurrentChange(val) {
+                this.page = val;
+            },
             batchDownload() {
                 var that = this
                 this.loading = true
@@ -254,6 +278,8 @@
         },
         data() {
             return {
+                page:1,
+                size:10,
                 choseUser: this.GLB.userName,
                 showUser: true,
                 userData: [],

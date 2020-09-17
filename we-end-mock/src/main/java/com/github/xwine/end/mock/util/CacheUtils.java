@@ -46,20 +46,4 @@ public class CacheUtils {
         JsonElement jsonElement = JsonUtils.toJsonTree(object, type);
         FileUtils.saveJsonToFile(jsonElement,EnvUtils.getBasicMockFilePath(name));
     }
-
-
-    public static String getAllCacheData() {
-        JsonElement object = FileUtils.getObjectFromFile(EnvUtils.getBasicMockFilePath());
-        if (object != null) {
-            return object.toString();
-        }
-        return null;
-    }
-
-    public static void saveDataCache(String json) {
-        JsonElement jsonObject = JsonUtils.parseJson(json);
-        if (jsonObject != null) {
-            FileUtils.saveJsonToFile(jsonObject,EnvUtils.getBasicMockFilePath());
-        }
-    }
 }

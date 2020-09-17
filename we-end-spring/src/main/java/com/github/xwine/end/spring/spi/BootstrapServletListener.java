@@ -1,8 +1,7 @@
 package com.github.xwine.end.spring.spi;
 
-import com.github.xwine.end.spring.WebEndFilter;
 import com.github.xwine.end.mock.MockContext;
-import com.github.xwine.end.mock.util.PropertiesUtil;
+import com.github.xwine.end.spring.WebEndFilter;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.DispatcherType;

@@ -8,6 +8,8 @@ class WeEndTestApplicationTests {
 
     @Test
     void contextLoads() {
+        Class<?> clazz = null;
+
     }
 
 }

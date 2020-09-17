@@ -116,11 +116,6 @@ public final class ObjectMock {
     }
 
     public static void main(String[] args) {
-        System.out.println(getObject(MockConfig.class));
-//        System.out.println(getObjectAndCache("test1",MockConfig.class));
-//        System.out.println(getObjectAndCache("test2",MockConfig.class));
-//        System.out.println(getObjectAndCache("test3",MockConfig.class));
-
         System.out.println(".___  ___.   ______     ______  __  ___ \n" +
                 "|   \\/   |  /  __  \\   /      ||  |/  / \n" +
                 "|  \\  /  | |  |  |  | |  ,----'|  '  /  \n" +

@@ -1,17 +1,11 @@
 package com.github.xwine.end.mock;
 
-import com.github.xwine.end.mock.constraint.IConst;
+import com.github.xwine.end.mock.constraint.VMEnum;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MockConfig {
-
-    /**
-     *  open or close mock
-     */
     private Boolean weEndOn = false;
     private Boolean mockOn = false;
     private String appName = "we-end";
@@ -34,6 +28,8 @@ public class MockConfig {
     private Date templateDate = new Date();
     private String consolePrefix = "/console";
     private List<String> mockClasses = new ArrayList<>();
+    private Map<String,String> extConfig = new HashMap<String,String>();
+    private Map<String,Object> intelligent = new HashMap<String,Object>();
 
     public MockConfig() {
     }
@@ -216,6 +212,15 @@ public class MockConfig {
         return this;
     }
 
+    public Map<String, String> getExtConfig() {
+        return extConfig;
+    }
+
+    public MockConfig setExtConfig(Map<String, String> extConfig) {
+        this.extConfig = extConfig;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "MockConfig{" +
@@ -241,26 +246,25 @@ public class MockConfig {
                 ", templateDate=" + templateDate +
                 ", consolePrefix='" + consolePrefix + '\'' +
                 ", mockClasses=" + mockClasses +
+                ", extConfig=" + extConfig +
+                ", intelligent=" + intelligent +
                 '}';
     }
 
     public static String initNowUser() {
-        return System.getProperty("user.name","no-name");
-    }
-
-    public static boolean initMockOn() {
-        String mockOn = System.getProperty(IConst.PROD_DATA_CONFIG_MOCK_ON,"false");
-        if ("true".equals(mockOn)) {
-            return true;
-        }
-        return false;
+        return System.getProperty(VMEnum.USER_NAME.getKey(),VMEnum.USER_NAME.getValue());
     }
 
     public static String initAppName() {
-        return System.getProperty(IConst.PROD_DATA_CONFIG_APP_NAME,"we-end");
+        return System.getProperty(VMEnum.APP_NAME.getKey(),VMEnum.APP_NAME.getValue());
     }
 
-    public static String initPath() {
-        return System.getProperty(IConst.PROD_DATA_CONFIG_PATH,"/export/data/mock");
+    public Map<String, Object> getIntelligent() {
+        return intelligent;
+    }
+
+    public MockConfig setIntelligent(Map<String, Object> intelligent) {
+        this.intelligent = intelligent;
+        return this;
     }
 }

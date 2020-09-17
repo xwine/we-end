@@ -17,7 +17,6 @@ import com.github.xwine.end.spring.processor.loc.GetLocDataProcessor;
 import com.github.xwine.end.spring.processor.loc.GetLocDicProcessor;
 import com.github.xwine.end.spring.processor.loc.UploadProcessor;
 import com.github.xwine.end.spring.util.FileUtil;
-import com.github.xwine.end.mock.util.PropertiesUtil;
 import org.springframework.core.env.Environment;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
