@@ -1,5 +1,7 @@
 import lombok.Data;
 
+import java.util.Set;
+
 /**
  *
  */
@@ -9,4 +11,5 @@ public class Mantou {
     private int age;
     private boolean pass;
     private long hireNumber;
+    private Set<String> children;
 }

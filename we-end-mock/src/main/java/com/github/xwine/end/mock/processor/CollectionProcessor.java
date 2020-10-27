@@ -4,10 +4,7 @@ import com.github.xwine.end.mock.util.ObjectUtils;
 import com.github.xwine.end.mock.util.TypeUtils;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author xwine
@@ -62,6 +59,16 @@ public class CollectionProcessor extends DefaultProcessor {
             }
             object = map;
         }
+        //Set结构
+        if (rawTypeSet(rawType)) {
+            if (actualTypeArgument.length != 1) {
+                throw new RuntimeException("泛型位数不符合要求");
+            }
+            Set<Object> set = new HashSet<Object>();
+            Type type = actualTypeArgument[0];
+            set.add(ObjectUtils.getObject(type, deep));
+            object = set;
+        }
         return object;
     }
 
@@ -75,6 +82,12 @@ public class CollectionProcessor extends DefaultProcessor {
 
     private static boolean rawTypeMap(Class<?> clazz) {
         if (clazz.equals(Map.class) || clazz.equals(HashMap.class)) {
+            return true;
+        }
+        return false;
+    }
+    private static boolean rawTypeSet(Class<?> clazz) {
+        if (clazz.equals(Set.class) || clazz.equals(HashSet.class)) {
             return true;
         }
         return false;

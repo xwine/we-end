@@ -20,9 +20,9 @@ public class BatchDownloadProcessor implements Processor {
             if (mockFileService != null) {
                 success = mockFileService.batchDownloadFile(user);
                 if (success) {
-                    result.put("message", "上传成功");
+                    result.put("message", "下载成功");
                 } else {
-                    result.put("message", "上传失败");
+                    result.put("message", "下载失败");
                 }
             }
         } catch (Exception e) {

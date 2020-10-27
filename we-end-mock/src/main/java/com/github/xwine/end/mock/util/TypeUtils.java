@@ -52,6 +52,8 @@ public final class TypeUtils {
         String typeName = cc.toString();
         if (typeName.startsWith(ArrayList.class.getName())
                 || typeName.startsWith(List.class.getName())
+                || typeName.startsWith(Set.class.getName())
+                || typeName.startsWith(HashSet.class.getName())
                 || typeName.startsWith(LinkedList.class.getName())
                 || typeName.startsWith(HashMap.class.getName())
                 || typeName.startsWith(Map.class.getName())) {
