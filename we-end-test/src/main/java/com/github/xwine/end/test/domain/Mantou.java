@@ -1,6 +1,7 @@
+package com.github.xwine.end.test.domain;
+
 import lombok.Data;
 
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -12,6 +13,5 @@ public class Mantou {
     private int age;
     private boolean pass;
     private long hireNumber;
-    private Date created;
     private Set<String> children;
 }

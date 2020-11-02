@@ -30,6 +30,7 @@ public class MockConfig {
     private List<String> mockClasses = new ArrayList<>();
     private Map<String,String> extConfig = new HashMap<String,String>();
     private Map<String,Object> intelligent = new HashMap<String,Object>();
+    private Boolean intelligentOn = true;
 
     public MockConfig() {
     }
@@ -265,6 +266,15 @@ public class MockConfig {
 
     public MockConfig setIntelligent(Map<String, Object> intelligent) {
         this.intelligent = intelligent;
+        return this;
+    }
+
+    public Boolean getIntelligentOn() {
+        return intelligentOn;
+    }
+
+    public MockConfig setIntelligentOn(Boolean intelligentOn) {
+        this.intelligentOn = intelligentOn;
         return this;
     }
 }

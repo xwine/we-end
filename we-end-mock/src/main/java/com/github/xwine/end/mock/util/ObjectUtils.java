@@ -20,12 +20,12 @@ public final class ObjectUtils {
      * @param objectDeep
      * @return
      */
-    public static Object getObject(Type type, int objectDeep) {
+    public static Object getObject(Type type, int objectDeep, String name) {
         if (objectDeep <= 0) {
             return new DefaultProcessor(type).process();
         }
         if (TypeUtils.isBaseDataType(type)) {
-            return new BasicProcessor(type, objectDeep).process();
+            return new BasicProcessor(type, objectDeep,name).process();
         }
         if (TypeUtils.isArrayDataType(type)) {
             return new ArrayProcessor(type, objectDeep).process();
@@ -44,6 +44,10 @@ public final class ObjectUtils {
             return new GenProcessor(type, objectDeep - 1).process();
         }
         return new DefaultProcessor(type).process();
+    }
+
+    public static Object getObject(Type type, int objectDeep) {
+        return getObject(type,objectDeep,null);
     }
 
 }

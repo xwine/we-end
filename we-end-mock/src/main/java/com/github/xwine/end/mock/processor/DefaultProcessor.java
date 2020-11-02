@@ -13,6 +13,8 @@ public class DefaultProcessor implements Processor {
     public int deep = 1;
     public Type type;
     public Type genType;
+    //对象名，便于智能生成
+    public String name;
 
     public DefaultProcessor(Type type) {
         this.type = type;
@@ -26,6 +28,12 @@ public class DefaultProcessor implements Processor {
         this.deep = deep;
         this.type = type;
         this.genType = genType;
+    }
+
+    public DefaultProcessor(Type type,int deep, String name) {
+        this.type = type;
+        this.deep = deep;
+        this.name = name;
     }
 
     public Object process() {

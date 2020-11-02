@@ -1,9 +1,7 @@
 package com.github.xwine.end.mock.processor;
 
-import com.github.xwine.end.mock.util.ClassUtils;
-import com.github.xwine.end.mock.util.ObjectUtils;
-import com.github.xwine.end.mock.util.StringUtils;
-import com.github.xwine.end.mock.util.TypeUtils;
+import com.github.xwine.end.mock.MockContext;
+import com.github.xwine.end.mock.util.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -59,7 +57,7 @@ public class ObjectProcessor  extends DefaultProcessor {
 
     private void objectFields(Class clazz, Object obj, Field[] fields) throws Exception {
         String fieldSetMethodName;
-        Object fieldValue;
+        Object fieldValue = null;
         for (Field field : fields) {
             //排除静态字段
             if (Modifier.isStatic(field.getModifiers())) {
@@ -70,14 +68,14 @@ public class ObjectProcessor  extends DefaultProcessor {
             // 获取属性对应的设置方法名
             if (field.getType().equals(Object.class) && genType != null) {
                 //private T obj;
-                fieldValue = ObjectUtils.getObject(genType, deep);
+                fieldValue = ObjectUtils.getObject(genType, deep,field.getName());
             } else if (genType != null &&
                     TypeUtils.isCollectionDataType(field.getGenericType()) &&
                     field.getGenericType().toString().contains("<T")) {
                 Processor processor = new CollectionProcessor(2, field.getGenericType(), genType);
                 fieldValue = processor.process();
             } else {
-                fieldValue = ObjectUtils.getObject(field.getGenericType(), deep);
+                fieldValue = ObjectUtils.getObject(field.getGenericType(), deep,field.getName());
             }
             // 获取属性对应的设置方法名 先调用set方法，如果失败 直接设置值
             Method method = null;
