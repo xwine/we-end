@@ -55,9 +55,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.jd.rd.man</groupId>
+            <groupId>com.github.xwine</groupId>
             <artifactId>we-end-spring</artifactId>
-            <version>1.4.1-SNAPSHOT</version>
+            <version>1.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

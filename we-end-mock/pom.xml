@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <groupId>com.jd.rd.man</groupId>
-    <version>1.4.1-SNAPSHOT</version>
+    <groupId>com.github.xwine</groupId>
+    <version>1.4.1</version>
     <artifactId>we-end-mock</artifactId>
     <modelVersion>4.0.0</modelVersion>
     <dependencies>
@@ -80,28 +80,16 @@
                 <java.version>1.8</java.version>
             </properties>
             <!--定义snapshots库和releases库的nexus地址-->
-<!--            <distributionManagement>-->
-<!--                <snapshotRepository>-->
-<!--                    &lt;!&ndash;oss需要对应到settings.xml下的service的id&ndash;&gt;-->
-<!--                    <id>oss</id>-->
-<!--                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-<!--                </snapshotRepository>-->
-<!--                <repository>-->
-<!--                    <id>oss</id>-->
-<!--                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-<!--                </repository>-->
-<!--            </distributionManagement>-->
             <distributionManagement>
-                <repository>
-                    <id>jd-central</id>
-                    <name>libs-releases</name>
-                    <url>http://artifactory.jd.com/libs-releases-local</url>
-                </repository>
                 <snapshotRepository>
-                    <id>jd-snapshots</id>
-                    <name>libs-snapshots</name>
-                    <url>http://artifactory.jd.com/libs-snapshots-local</url>
+                    <!--oss需要对应到settings.xml下的service的id-->
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                 </snapshotRepository>
+                <repository>
+                    <id>oss</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
             </distributionManagement>
         </profile>
     </profiles>
@@ -116,40 +104,40 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-<!--            &lt;!&ndash;生产源码文件插件&ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-source-plugin</artifactId>-->
-<!--                <version>3.0.0</version>-->
-<!--                <configuration>-->
-<!--                    <attach>true</attach>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>jar</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--生产源码文件插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!--生产javadoc插件-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                <version>2.9.1</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>jar</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <additionalparam>-Xdoclint:none</additionalparam>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!--gpg加密插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
