@@ -15,7 +15,7 @@ we-end 目的是要解决开发人员本地测试依赖的上游接口没有测�
     <dependency>
         <groupId>com.github.xwine</groupId>
         <artifactId>we-end-spring</artifactId>
-        <version>1.3.2</version>
+        <version>1.4.1</version>
     </dependency>
 ```
 
