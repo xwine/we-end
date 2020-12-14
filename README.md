@@ -15,7 +15,11 @@ we-end 目的是要解决开发人员本地测试依赖的上游接口没有测�
     <dependency>
         <groupId>com.github.xwine</groupId>
         <artifactId>we-end-spring</artifactId>
+<<<<<<< HEAD
         <version>1.4.1</version>
+=======
+        <version>1.3.2</version>
+>>>>>>> origin/master
     </dependency>
 ```
 
@@ -76,11 +80,17 @@ util-end 默认有许多可配置项，不配置都是走默认，比如数据�
 
 | 属性               | 类型         | 默认值                 | 描述                                  | 起始版本 |
 | ------------------ | ------------ | ---------------------- | ------------------------------------- | -------- |
+<<<<<<< HEAD
 | weEndOn             | Boolean      | true                   | 是否开启控制管理端                      |          |
 | mockOn             | Boolean      | true                   | 是否开启mock                          |          |
 | appName            | String       |  ...                   | 根据当前项目所在路径获取到的项目名         |          |
 | nowUser            | String       |  ...                   | 从系统环境变量中获取系统用户              |          |
 | path               | String       |                        | mock数据和配置文件存储位置                      |          |
+=======
+| appName            | String       |  ...                   | 根据当前项目所在路径获取到的项目名         |          |
+| nowUser            | String       |  ...                   | 从系统环境变量中获取系统用户              |          |
+| path               | String       |                        | mock文件存储位置                      |          |
+>>>>>>> origin/master
 | localCacheSwitch   | Boolean      | false                   | 是否开启本地缓存                      |          |
 | remoteCacheSwitch  | Boolean      | true                   | 是否开启远程缓存                      |          |
 | idCachePath        | String       | data                   | 接口方法mock数据缓存目录              |          |
@@ -95,11 +105,17 @@ util-end 默认有许多可配置项，不配置都是走默认，比如数据�
 | templateCharacter  | Character    | o                      | -                                     |          |
 | templateByte       | Byte         | 1                      | -                                     |          |
 | templateDate       | Date         | Jul 1, 2020 4:23:06 PM | -                                     |          |
+<<<<<<< HEAD
 | consolePrefix      | String       | /console               | 本地控制台拦截url                     |          |
 | mockClasses        | List<String> | []                     | 需要mock的包，接口，或方法，接口_方法 |          |
 | extConfig        | Map<String,String> | {}                     |  可扩展配置，用于SPI接口使用 |          |
 | intelligentOn        | Boolean   | true                     |  是否开启智能字段生成   |          |
 | intelligent        | Map<String,Object> | {}                     |  智能字段生成参考库   |          |
+=======
+| mockOn             | Boolean      | true                   | 是否开启mock                          |          |
+| consolePrefix      | String       | /console               | 本地控制台拦截url                     |          |
+| mockClasses        | List<String> | []                     | 需要mock的包，接口，或方法，接口_方法 |          |
+>>>>>>> origin/master
 
 
 
@@ -109,6 +125,9 @@ util-end 默认有许多可配置项，不配置都是走默认，比如数据�
 
 2. 本地控制台拦截路径和当前项目冲突？
 > 可修改`.mock/config.json`文件`consolePrefix`属性，配置成自己的路径。
+<<<<<<< HEAD
 
 3. 启动项目成功，未打印日志图案？
 > 将日志logger  com.github.xwine设置level到info。
+=======
+>>>>>>> origin/master
